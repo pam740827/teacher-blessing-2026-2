@@ -7,18 +7,16 @@
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;900&family=Noto+Sans+TC:wght@500;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-dark: #1a0f30;   /* 深夜藍背景 */
+            --bg-dark: #1a0f30;
             --card-bg: #ffffff;
             --text-primary: #333;
             --text-secondary: #666;
-            /* 卡片頂部顏色輪替 (馬卡龍色系) */
             --color-1: #FF6B6B; --color-2: #4ECDC4; --color-3: #FFD166;
             --color-4: #6B5B95; --color-5: #F78888; --color-6: #90A4AE;
         }
 
         body {
             font-family: 'Nunito', 'Noto Sans TC', sans-serif;
-            /* 背景設定：深藍色，若有 bg.jpg 會自動載入 */
             background-color: var(--bg-dark);
             background-image: url('./bg.jpg'); 
             background-repeat: no-repeat;
@@ -30,7 +28,6 @@
             color: var(--text-primary);
             min-height: 100vh;
             box-sizing: border-box;
-            /* 如果沒有背景圖，用漸層補強 */
             background: linear-gradient(135deg, #1a0f30 0%, #2a1b4e 100%);
         }
 
@@ -40,140 +37,60 @@
             display: flex;
             flex-direction: column;
             gap: 20px;
-            padding-bottom: 100px; /* 預留底部空間給按鈕 */
+            padding-bottom: 100px;
         }
 
-        /* === 1. 頂部標題區 (放 GIF) === */
-        .header-section {
-            text-align: center;
-            margin-bottom: 10px;
-        }
+        /* === 1. 頂部標題區 === */
+        .header-section { text-align: center; margin-bottom: 10px; }
         .header-gif {
-            max-width: 250%;
-            height: auto;
-            border-radius: 20px;
-            /* 讓 GIF 有發光的效果 */
+            max-width: 300%; height: auto; border-radius: 20px;
             box-shadow: 0 0 30px rgba(255, 215, 0, 0.3);
-            max-height: 250px; /* 控制高度不要太佔版面 */
-            object-fit: contain;
+            max-height: 250px; object-fit: contain;
         }
 
-        /* === 2. 中間展示區 (合照 + 老師) === */
+        /* === 2. 中間展示區 === */
         .showcase-section {
-            display: flex;
-            justify-content: center;
-            align-items: flex-end; /* 底部對齊 */
-            gap: 30px;
-            flex-wrap: wrap; /* 手機版自動換行 */
+            display: flex; justify-content: center; align-items: flex-end;
+            gap: 30px; flex-wrap: wrap;
         }
-
-        /* 相框樣式 */
         .photo-frame {
-            flex: 2; /* 合照佔大一點 */
-            min-width: 300px;
-            max-width: 600px;
-            position: relative;
-            background: #fff;
-            padding: 15px 15px 40px 15px; /* 拍立得風格留白 */
-            border-radius: 5px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-            transform: rotate(-2deg); /*稍微歪一點比較活潑*/
+            flex: 2; min-width: 300px; max-width: 600px; position: relative;
+            background: #fff; padding: 15px 15px 40px 15px; border-radius: 5px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5); transform: rotate(-2deg);
         }
-        /* 用 CSS 模擬燈泡邊框效果 */
         .photo-frame::after {
-            content: '📸 康橋203班';
-            position: absolute;
-            bottom: 10px;
-            left: 0;
-            width: 100%;
-            text-align: center;
-            font-family: 'Indie Flower', cursive, sans-serif;
-            font-weight: bold;
-            color: #333;
-            font-size: 1.2em;
+            content: '📸 康橋203班'; position: absolute; bottom: 10px; left: 0;
+            width: 100%; text-align: center; font-family: sans-serif; font-weight: bold; color: #333; font-size: 1.4em;
         }
-
         .teacher-portrait {
-            flex: 1; /* 老師佔小一點 */
-            min-width: 200px;
-            max-width: 350px;
-            position: relative;
-            transform: rotate(2deg);
+            flex: 1; min-width: 200px; max-width: 350px; position: relative; transform: rotate(2deg);
         }
+        .showcase-img { width: 100%; height: auto; display: block; border-radius: 5px; }
+        .teacher-portrait img { filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.4)); border-radius: 20px; border: 4px solid #fff; }
 
-        .showcase-img {
-            width: 100%;
-            height: auto;
-            display: block;
-            border-radius: 5px;
-        }
-        
-        /* 老師照片特效 */
-        .teacher-portrait img {
-            filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.4));
-            border-radius: 20px;
-            border: 4px solid #fff;
-        }
-
-        /* === 3. 底部留言牆 (橫向捲動) === */
+        /* === 3. 底部留言牆 === */
         .wall-title {
-            color: white;
-            font-size: 1.5em;
-            margin-top: 30px;
-            margin-bottom: 10px;
-            text-shadow: 0 2px 5px rgba(0,0,0,0.5);
-            padding-left: 10px;
-            border-left: 5px solid var(--color-3);
+            color: white; font-size: 1.5em; margin-top: 30px; margin-bottom: 10px;
+            text-shadow: 0 2px 5px rgba(0,0,0,0.5); padding-left: 10px; border-left: 5px solid var(--color-3);
         }
-
         .blessing-wall-container {
-            width: 100%;
-            overflow-x: auto; /* 允許橫向捲動 */
-            padding: 20px 10px;
-            /* 隱藏捲動條 */
-            scrollbar-width: none; 
-            -ms-overflow-style: none;
+            width: 100%; overflow-x: auto; padding: 20px 10px;
+            scrollbar-width: none; -ms-overflow-style: none;
         }
-        .blessing-wall-container::-webkit-scrollbar {
-            display: none;
-        }
+        .blessing-wall-container::-webkit-scrollbar { display: none; }
+        .wall-scroll { display: flex; gap: 20px; width: max-content; }
 
-        .wall-scroll {
-            display: flex;
-            gap: 20px;
-            width: max-content; /* 寬度隨內容撐開 */
-        }
-
-        /* === 卡片設計 === */
+        /* === 卡片設計 (含點讚按鈕) === */
         .card {
-            background: var(--card-bg);
-            width: 240px; /* 卡片寬度 */
-            border-radius: 20px;
-            padding: 15px;
-            box-shadow: 5px 5px 15px rgba(0,0,0,0.3);
-            display: flex;
-            flex-direction: column;
-            position: relative;
-            overflow: hidden;
-            border: 3px solid white;
-            transition: transform 0.3s ease;
-            flex-shrink: 0; /* 防止卡片被壓縮 */
+            background: var(--card-bg); width: 240px; border-radius: 20px; padding: 15px;
+            box-shadow: 5px 5px 15px rgba(0,0,0,0.3); display: flex; flex-direction: column;
+            position: relative; overflow: hidden; border: 3px solid white;
+            transition: transform 0.3s ease; flex-shrink: 0;
         }
-        
-        .card:hover {
-            transform: translateY(-10px) scale(1.02);
-            z-index: 10;
-        }
-
-        /* 卡片頂部彩色條 */
+        .card:hover { transform: translateY(-10px) scale(1.02); z-index: 10; }
         .card::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; right: 0;
-            height: 10px;
-            background-color: var(--color-1);
+            content: ''; position: absolute; top: 0; left: 0; right: 0; height: 10px; background-color: var(--color-1);
         }
-        /* 顏色輪替 */
         .card:nth-child(6n+1)::before { background-color: var(--color-1); }
         .card:nth-child(6n+2)::before { background-color: var(--color-2); }
         .card:nth-child(6n+3)::before { background-color: var(--color-3); }
@@ -182,149 +99,93 @@
         .card:nth-child(6n+6)::before { background-color: var(--color-6); }
 
         .card img, .card video {
-            width: 100%;
-            height: 140px;
-            object-fit: cover;
-            border-radius: 12px;
-            margin-bottom: 10px;
-            border: 1px solid #eee;
-            background: #eee;
+            width: 100%; height: 140px; object-fit: cover; border-radius: 12px;
+            margin-bottom: 10px; border: 1px solid #eee; background: #eee;
         }
-
         .card-name {
-            font-weight: 900;
-            color: var(--text-primary);
-            margin-bottom: 5px;
-            font-size: 1.1em;
-            display: flex;
-            align-items: center;
+            font-weight: 900; color: var(--text-primary); margin-bottom: 5px; font-size: 1.1em;
+            display: flex; align-items: center;
         }
         .card-name::before {
-            content: '';
-            display: inline-block;
-            width: 10px; height: 10px;
-            background: var(--color-3);
-            border-radius: 50%;
-            margin-right: 8px;
+            content: ''; display: inline-block; width: 10px; height: 10px;
+            background: var(--color-3); border-radius: 50%; margin-right: 8px;
         }
-
         .card-text {
-            font-size: 0.95em;
-            line-height: 1.4;
-            color: var(--text-secondary);
-            white-space: pre-wrap;
-            background: #f9f9f9;
-            padding: 10px;
-            border-radius: 10px;
-            flex-grow: 1; /* 填滿高度 */
+            font-size: 0.95em; line-height: 1.4; color: var(--text-secondary);
+            white-space: pre-wrap; background: #f9f9f9; padding: 10px; border-radius: 10px;
+            flex-grow: 1; margin-bottom: 30px; /* 留空間給讚按鈕 */
         }
         
-        .timestamp {
-            font-size: 0.75em;
-            color: #aaa;
-            margin-top: 10px;
-            text-align: right;
+        .card-footer {
+            display: flex; justify-content: space-between; align-items: center;
+            margin-top: 10px; position: absolute; bottom: 15px; left: 15px; right: 15px;
         }
+        .timestamp { font-size: 0.75em; color: #aaa; }
 
-        /* === 發送按鈕 (右下角懸浮) === */
+        /* === ❤️ 按讚按鈕樣式 === */
+        .like-btn {
+            background: #eee; border: none; border-radius: 20px;
+            padding: 5px 12px; cursor: pointer; display: flex; align-items: center; gap: 5px;
+            font-weight: bold; color: #555; transition: all 0.2s; font-size: 0.9em;
+        }
+        .like-btn:hover { background: #e0e0e0; transform: scale(1.1); }
+        .like-btn.liked {
+            background: #ffebee; color: #ff1744; border: 1px solid #ff1744;
+        }
+        .heart-icon { transition: transform 0.2s; }
+        .like-btn:active .heart-icon { transform: scale(1.5); }
+
+        /* === 發送按鈕 === */
         .fab-btn {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
+            position: fixed; bottom: 30px; right: 30px;
             background: linear-gradient(135deg, #FFD166, #FF6B6B);
-            color: white;
-            border: 4px solid white;
-            width: 70px; height: 70px;
-            border-radius: 50%;
-            font-size: 30px;
-            cursor: pointer;
-            box-shadow: 0 5px 20px rgba(255, 107, 107, 0.6);
-            transition: all 0.3s;
-            z-index: 100;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            animation: pulse 2s infinite;
+            color: white; border: 4px solid white; width: 70px; height: 70px;
+            border-radius: 50%; font-size: 30px; cursor: pointer;
+            box-shadow: 0 5px 20px rgba(255, 107, 107, 0.6); z-index: 100;
+            display: flex; justify-content: center; align-items: center;
+            animation: pulse 2s infinite; transition: all 0.3s;
         }
-        .fab-btn:hover {
-            transform: scale(1.1) rotate(10deg);
-        }
+        .fab-btn:hover { transform: scale(1.1) rotate(10deg); }
         @keyframes pulse {
             0% { box-shadow: 0 0 0 0 rgba(255, 107, 107, 0.7); }
             70% { box-shadow: 0 0 0 20px rgba(255, 107, 107, 0); }
             100% { box-shadow: 0 0 0 0 rgba(255, 107, 107, 0); }
         }
 
-        /* === 彈出式表單 (Modal) === */
+        /* === 彈出式表單 === */
         .modal-overlay {
-            display: none;
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.8);
-            z-index: 200;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-            backdrop-filter: blur(5px);
+            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.8); z-index: 200; justify-content: center; align-items: center;
+            padding: 20px; backdrop-filter: blur(5px);
         }
         .modal-content {
-            background: white;
-            padding: 30px;
-            border-radius: 25px;
-            width: 100%;
-            max-width: 450px;
-            position: relative;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
-            border: 5px solid var(--color-3);
+            background: white; padding: 30px; border-radius: 25px; width: 100%; max-width: 450px;
+            position: relative; box-shadow: 0 20px 50px rgba(0,0,0,0.5); border: 5px solid var(--color-3);
             animation: slideUp 0.3s ease-out;
         }
         @keyframes slideUp { from { transform: translateY(50px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
-
-        .close-btn {
-            position: absolute;
-            top: 15px; right: 20px;
-            font-size: 28px;
-            cursor: pointer;
-            color: #ccc;
-            transition: color 0.2s;
-        }
-        .close-btn:hover { color: #333; }
-
-        .modal-title {
-            text-align: center;
-            color: var(--text-primary);
-            margin-bottom: 20px;
-            font-weight: 900;
-            font-size: 1.5em;
-        }
-
-        /* 表單元件 */
+        .close-btn { position: absolute; top: 15px; right: 20px; font-size: 28px; cursor: pointer; color: #ccc; }
+        .modal-title { text-align: center; color: var(--text-primary); margin-bottom: 20px; font-weight: 900; font-size: 1.5em; }
         .form-group { margin-bottom: 20px; }
         label { display: block; margin-bottom: 8px; font-weight: 700; color: var(--text-primary); }
         input[type="text"], textarea, input[type="file"] {
             width: 100%; padding: 12px; border: 2px solid #eee; border-radius: 15px;
             box-sizing: border-box; font-size: 1em; background-color: #f8f8f8;
         }
-        input:focus, textarea:focus { outline: none; border-color: var(--color-2); background-color: white; }
-        
         .submit-btn {
             background: linear-gradient(to right, var(--color-2), var(--color-1));
             color: white; border: none; padding: 15px; font-size: 1.2em; font-weight: 900;
             border-radius: 50px; cursor: pointer; width: 100%; transition: all 0.2s;
             box-shadow: 0 5px 15px rgba(78, 205, 196, 0.4);
         }
-        .submit-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(78, 205, 196, 0.6); }
-        
         .loading { text-align: center; display: none; margin-bottom: 15px; color: var(--color-1); font-weight: bold; }
 
-        /* 手機版調整 */
         @media (max-width: 600px) {
             .showcase-section { flex-direction: column; align-items: center; }
             .photo-frame { width: 90%; transform: rotate(0); margin-bottom: 20px; }
             .teacher-portrait { width: 70%; transform: rotate(0); }
-            .card { width: 200px; }
+            .card { width: 220px; }
         }
-
     </style>
 </head>
 <body>
@@ -343,7 +204,7 @@
         </div>
     </div>
 
-    <h3 class="wall-title">✨ 大家的祝福牆 ✨</h3>
+    <h3 class="wall-title">✨ 大家的祝福牆 (點愛心按讚) ✨</h3>
     <div class="blessing-wall-container">
         <div id="blessingWall" class="wall-scroll">
             <p style="text-align:center; width:300px; color:white; font-weight:bold; padding:20px;">🚀 正在連線到外太空載入祝福...</p>
@@ -359,7 +220,7 @@
         <h2 class="modal-title">🧧 寫下新年祝福</h2>
         
         <div class="form-group">
-            <label>🧑‍🎓 我是誰 (學生/家長)</label>
+            <label>🧑‍🎓 我是誰</label>
             <input type="text" id="nameInput" placeholder="例如：小明 / 203班 小美媽媽">
         </div>
         <div class="form-group">
@@ -377,10 +238,11 @@
 
 <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-    import { getFirestore, collection, addDoc, onSnapshot, query, orderBy, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+    // 引入新的 Firestore 功能：doc, updateDoc, increment
+    import { getFirestore, collection, addDoc, onSnapshot, query, orderBy, serverTimestamp, doc, updateDoc, increment } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
     import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-storage.js";
 
-    // 你的 Firebase Config (已設定好)
+    // 你的 Firebase Config (保持不變)
     const firebaseConfig = {
       apiKey: "AIzaSyBtL7RByLfXNd19LvF9TfjNSM0hswi6cM0",
       authDomain: "teacher-blessing-2026.firebaseapp.com",
@@ -402,14 +264,11 @@
     const openBtn = document.getElementById('openModalBtn');
     const closeBtn = document.getElementById('closeModalBtn');
 
-    // === Modal 操作 ===
     openBtn.addEventListener('click', () => modal.style.display = 'flex');
     closeBtn.addEventListener('click', () => modal.style.display = 'none');
-    modal.addEventListener('click', (e) => {
-        if (e.target === modal) modal.style.display = 'none';
-    });
+    modal.addEventListener('click', (e) => { if (e.target === modal) modal.style.display = 'none'; });
 
-    // === Firebase 資料監聽 ===
+    // === 資料監聽 ===
     const q = query(collection(db, "blessings"), orderBy("timestamp", "desc"));
     
     onSnapshot(q, (snapshot) => {
@@ -419,18 +278,17 @@
             return;
         }
 
-        snapshot.forEach((doc) => {
-            const data = doc.data();
-            renderCard(data);
+        snapshot.forEach((snapshotDoc) => {
+            const data = snapshotDoc.data();
+            renderCard(data, snapshotDoc.id); // 傳入 ID 才能更新讚數
         });
-    }, (error) => {
-        console.error("讀取失敗:", error);
     });
 
-    function renderCard(data) {
+    function renderCard(data, docId) {
         const card = document.createElement('div');
         card.className = 'card';
         
+        // 媒體內容
         let mediaHtml = '';
         if (data.fileUrl) {
             if (data.fileType && data.fileType.startsWith('video')) {
@@ -440,19 +298,58 @@
             }
         }
 
+        // 時間處理
         let dateStr = "剛剛";
         if (data.timestamp) {
             const date = new Date(data.timestamp.seconds * 1000);
             dateStr = date.getMonth()+1 + "/" + date.getDate();
         }
 
+        // --- 點讚邏輯 ---
+        // 檢查本地是否有點過這個卡片的讚
+        const localLikeKey = `liked_${docId}`;
+        const isLiked = localStorage.getItem(localLikeKey) === 'true';
+        const likeCount = data.likes || 0;
+
         card.innerHTML = `
             ${mediaHtml}
             <div class="card-name">${escapeHtml(data.name)}</div>
             <div class="card-text">${escapeHtml(data.message)}</div>
-            <div class="timestamp">${dateStr}</div>
+            <div class="card-footer">
+                <span class="timestamp">${dateStr}</span>
+                <button class="like-btn ${isLiked ? 'liked' : ''}" id="btn-${docId}">
+                    <span class="heart-icon">${isLiked ? '❤️' : '🤍'}</span> 
+                    <span id="count-${docId}">${likeCount}</span>
+                </button>
+            </div>
         `;
+        
+        // 綁定按讚事件 (這段寫在 create 之後比較安全)
+        const likeBtn = card.querySelector(`#btn-${docId}`);
+        likeBtn.onclick = () => handleLike(docId, isLiked);
+
         wallDiv.appendChild(card);
+    }
+
+    // === 處理按讚函數 ===
+    async function handleLike(docId, currentlyLiked) {
+        const docRef = doc(db, "blessings", docId);
+        const localLikeKey = `liked_${docId}`;
+
+        try {
+            if (currentlyLiked) {
+                // 如果已經按讚 -> 取消讚 (數字 -1)
+                await updateDoc(docRef, { likes: increment(-1) });
+                localStorage.removeItem(localLikeKey);
+            } else {
+                // 如果沒按過讚 -> 按讚 (數字 +1)
+                await updateDoc(docRef, { likes: increment(1) });
+                localStorage.setItem(localLikeKey, 'true');
+            }
+            // 介面會因為 onSnapshot 自動更新，所以這裡不需要手動改 HTML
+        } catch (error) {
+            console.error("按讚失敗:", error);
+        }
     }
 
     submitBtn.addEventListener('click', async () => {
@@ -462,18 +359,13 @@
         const file = fileInput.files[0];
 
         if (name.trim() === "" || message.trim() === "") {
-            alert("請填寫名字和祝福內容喔！");
-            return;
+            alert("請填寫名字和祝福內容喔！"); return;
         }
 
-        submitBtn.disabled = true;
-        submitBtn.innerHTML = "傳送中...";
-        loadingText.style.display = "block";
+        submitBtn.disabled = true; submitBtn.innerHTML = "傳送中..."; loadingText.style.display = "block";
 
         try {
-            let fileUrl = "";
-            let fileType = "";
-
+            let fileUrl = ""; let fileType = "";
             if (file) {
                 const storageRef = ref(storage, 'blessings/' + Date.now() + '_' + file.name);
                 const snapshot = await uploadBytes(storageRef, file);
@@ -486,6 +378,7 @@
                 message: message,
                 fileUrl: fileUrl,
                 fileType: fileType,
+                likes: 0, // 新增：預設讚數為 0
                 timestamp: serverTimestamp()
             });
 
@@ -496,12 +389,9 @@
             alert("✨ 祝福發送成功！ ✨");
 
         } catch (e) {
-            console.error("Error: ", e);
-            alert("發送失敗，請稍後再試。");
+            console.error("Error: ", e); alert("發送失敗，請稍後再試。");
         } finally {
-            submitBtn.disabled = false;
-            submitBtn.innerHTML = "發送祝福";
-            loadingText.style.display = "none";
+            submitBtn.disabled = false; submitBtn.innerHTML = "發送祝福"; loadingText.style.display = "none";
         }
     });
 
@@ -510,11 +400,9 @@
         return text.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
     }
 
-    // === 老師專屬模式 (隱藏發送按鈕) ===
     const urlParams = new URLSearchParams(window.location.search);
     if (urlParams.get('mode') === 'teacher') {
         openBtn.style.display = 'none'; 
-        // 老師模式下，把標題改一下
         document.querySelector('.wall-title').innerText = '💖 學生們給您的滿滿祝福 💖';
     }
 </script>
